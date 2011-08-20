@@ -2,11 +2,11 @@
  * matriz.c
  * Programa que suma, multiplica, escala, imprime y obtiene el determinante de matrices definidos con estructuras.
  * Elaborado por: Aftab Hussain Miranda
- * Fecha de elaboración: 20 de Agosto del 2011.
+ * Fecha de elaboracion: 20 de Agosto del 2011.
  *
  * Repositorio: https://github.com/wafto
  * Compilacion: gcc -o app_matriz matriz.c
- * Ejecución:   ./app_matriz
+ * Ejecucion: ./app_matriz
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,7 +63,7 @@ Matriz* identidadMatriz(int tam) {
 void imprimirMatriz(const Matriz* matriz) {
     int i, j;
     if ( matriz != NULL ) {
-        for ( i = 0; i < matriz->filas; i++) {
+        for ( i = 0; i < matriz->filas; i++ ) {
             for ( j = 0; j < matriz->columnas; j++ ) {
                 printf("%f\t", matriz->info[i][j]);
             }
@@ -165,7 +165,7 @@ int main() {
     M2->info[1][1] = 4.3;
     imprimirMatriz(M2);
     
-    printf("\nTercera matriz (Identidad 2):\n");
+    printf("\nTercera matriz (Identidad 4):\n");
     imprimirMatriz(M3);
     
     printf("\nSuma de las matrices:\n");
