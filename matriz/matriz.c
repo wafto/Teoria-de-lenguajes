@@ -31,9 +31,8 @@ Matriz* crearMatriz(int filas, int columnas) {
             }
         }
         return matriz;
-    } else {
-        return NULL;
     }
+    return NULL;
 }
 
 int eliminarMatriz(Matriz* matriz) {
