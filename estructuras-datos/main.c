@@ -5,7 +5,7 @@
  * Fecha de elaboracion: 2 de Septiembre del 2011.
  *
  * Repositorio: https://github.com/wafto
- * Compilacion: gcc -o ./structuras_datos_app library/pila.c main.c
+ * Compilacion: gcc -o ./structuras_datos_app library/pila.c library/cola.c main.c
  * Ejecucion: ./estructuras_datos_app
  */
 #include <stdio.h>
