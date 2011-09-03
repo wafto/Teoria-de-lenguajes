@@ -18,14 +18,14 @@ int main() {
 
 	inicializaPila(&pila);
 
-	for (i = 0; i < 100; i++)
-		push(&pila, i);
+	for (i = 0; i < 1000; i++)
+		push(&pila, random(1000));
 
 	while (!estaVacia(pila)) {
 		elemento = pop(&pila, &bandera);
 		dimension = dimensionPila(pila);
 		if (bandera)
-			printf("Se saco de la pila el elemento %d y la dimesion de la pila ahora es %d\n", elemento, dimension);
+			printf("Se saco de la pila el elemento %d y la dimesion ahora es %d\n", elemento, dimension);
 	}
 
 	return 0;
