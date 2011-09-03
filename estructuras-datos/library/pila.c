@@ -17,7 +17,7 @@ int push(Pila* p, ElementoPila e) {
 ElementoPila pop(Pila* p, int* bandera) {
 	NodoPila* nodo;
 	ElementoPila e;
-	if (estaVacia(*p)) {
+	if (estaVaciaPila(*p)) {
 		*bandera = 0;
 		return e;
 	}
@@ -32,21 +32,20 @@ ElementoPila pop(Pila* p, int* bandera) {
 ElementoPila verTope(Pila p, int* bandera) {
 	ElementoPila e;
 	*bandera = 0;
-	if (estaVacia(p))
+	if (estaVaciaPila(p))
 		return e;
 	*bandera = 1;
 	e = p->valor;
 	return e;
 }
 
-int estaVacia(Pila p) {
+int estaVaciaPila(Pila p) {
 	return p == NULL ? 1 : 0;
 }
 
 int dimensionPila(Pila p) {
-	NodoPila* nodo;
-	int dimension;
-	nodo = p;
+	int dimension = 0;
+	NodoPila* nodo = p;
 	while (nodo != NULL) {
 		nodo = nodo->pSiguiente;
 		dimension++;

@@ -10,22 +10,56 @@
  */
 #include <stdio.h>
 #include "library/pila.h"
+#include "library/cola.h"
 
 int main() {
-	ElementoPila elemento;
+	ElementoPila ep;
 	Pila pila;
+
+	ElementoCola ec;
+	Cola cola;
+
 	int bandera, dimension, i;
 
 	inicializaPila(&pila);
+	inicializaCola(&cola);
 
-	for (i = 0; i < 1000; i++)
-		push(&pila, random(1000));
+	printf("\nAgregamos valores a la Pila\n");
 
-	while (!estaVacia(pila)) {
-		elemento = pop(&pila, &bandera);
+	for (i = 0; i < 10; i++) {
+		push(&pila, random() % 1001);
 		dimension = dimensionPila(pila);
+		ep = verTope(pila, &bandera);
 		if (bandera)
-			printf("Se saco de la pila el elemento %d y la dimesion ahora es %d\n", elemento, dimension);
+			printf("Pila(%d) : valor %d\n", dimension, ep);
+	}
+
+	printf("\nSacamos valores a la Pila\n");
+
+	while (!estaVaciaPila(pila)) {
+		dimension = dimensionPila(pila);
+		ep = pop(&pila, &bandera);
+		if (bandera)
+			printf("Pila(%d) : valor %d\n", dimension, ep);
+	}
+
+	printf("\nAgregamos valores a la Cola\n");
+
+	for (i = 0; i < 10; i++) {
+		agregar(&cola, random() % 1001);
+		dimension = dimensionCola(cola);
+		ec = verFinal(cola, &bandera);
+		if (bandera)
+			printf("Cola(%d) : valor %d\n", dimension, ec);
+	}
+
+	printf("\nSacamos valores a la Cola\n");
+
+	while (!estaVaciaCola(cola)) {
+		dimension = dimensionCola(cola);
+		ec = sacar(&cola, &bandera);
+		if (bandera)
+			printf("Cola(%d) : valor %d\n", dimension, ec);
 	}
 
 	return 0;

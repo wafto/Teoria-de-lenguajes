@@ -14,7 +14,7 @@ void inicializaPila(Pila* p);
 int push(Pila* p, ElementoPila e);
 ElementoPila pop(Pila* p, int* bandera);
 ElementoPila verTope(Pila p, int* bandera);
-int estaVacia(Pila p);
+int estaVaciaPila(Pila p);
 int dimensionPila(Pila p);
 NodoPila* crearNodoPila(ElementoPila e);
 
