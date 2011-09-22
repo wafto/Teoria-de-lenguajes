@@ -12,6 +12,7 @@ class Cadena {
 		// Destructor
 		~Cadena();
 		// Metodos
+		void invierte();
 		void imprimir();
 		int longitud();
 		void mayusculas();

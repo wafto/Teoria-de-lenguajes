@@ -10,7 +10,6 @@
  */
 #include <iostream>
 #include "library/cadena.h"
-using namespace std;
 
 int main() {
 	// Creamos una cadena con el famosisimo "Hola Mundo"
@@ -28,6 +27,10 @@ int main() {
 
 	// Cambia a Minusculas toda la cadena y se imprime posteriormente
 	micadena.minusculas();
+	micadena.imprimir();
+
+	// Invierte el ordern de la cadena
+	micadena.invierte();
 	micadena.imprimir();
 	
 	return 0;

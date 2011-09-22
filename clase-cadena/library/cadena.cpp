@@ -2,7 +2,7 @@
 #include <locale>
 #include "cadena.h"
 
-//Constructores
+// Constructores
 Cadena::Cadena() {
 	mInfo = NULL;
 	mLongitud = 0;
@@ -14,8 +14,20 @@ Cadena::Cadena(const char* c) {
 	strcpy(mInfo, c);
 }
 
+// Destructor
 Cadena::~Cadena() { 
 	if (mInfo != NULL) delete mInfo; 
+}
+
+// Metodos
+void Cadena::invierte() {
+	char aux;
+	int limite = mLongitud / 2;
+	for(int i = 0; i < limite; i++) {
+		aux = mInfo[i];
+		mInfo[i] = mInfo[mLongitud - i - 1];
+		mInfo[mLongitud - i - 1] = aux;
+	}
 }
 
 void Cadena::imprimir() {
@@ -27,11 +39,11 @@ int Cadena::longitud() {
 }
 
 void Cadena::mayusculas() {
-	for(int i = 0; i < mLongitud; i++) mInfo[i] = toupper(mInfo[i]);
+	for (int i = 0; i < mLongitud; i++) mInfo[i] = toupper(mInfo[i]);
 }
 
 void Cadena::minusculas() {
-	for(int i = 0; i < mLongitud; i++) mInfo[i] = tolower(mInfo[i]);
+	for (int i = 0; i < mLongitud; i++) mInfo[i] = tolower(mInfo[i]);
 }
 
 void Cadena::recortar() {
@@ -39,7 +51,11 @@ void Cadena::recortar() {
 }
 
 char* Cadena::extraer(int pos, int tam) {
-	
+	char* extraido;
+	if (pos >= 0 && pos < mLongitud - 1 && tam > 0) {
+		
+	}
+	return extraido;
 }
 
 char* Cadena::remplazar(char* v, char* n) {
