@@ -9,9 +9,7 @@ Cadena::Cadena() {
 }
 
 Cadena::Cadena(const char* c) {
-	for (mLongitud = 0; c[mLongitud] != '\0'; mLongitud++);
-	mInfo = new char[mLongitud];
-	strcpy(mInfo, c);
+	poner(c);
 }
 
 // Destructor
@@ -20,6 +18,14 @@ Cadena::~Cadena() {
 }
 
 // Metodos
+void Cadena::poner(const char* c) {
+	if (mInfo != NULL)
+		delete mInfo;
+	for (mLongitud = 0; c[mLongitud] != '\0'; mLongitud++);
+	mInfo = new char[mLongitud];
+	strcpy(mInfo, c);
+}
+
 void Cadena::invierte() {
 	char aux;
 	int limite = mLongitud / 2;
@@ -47,7 +53,14 @@ void Cadena::minusculas() {
 }
 
 void Cadena::recortar() {
-	
+	int pos, sop;
+	for (pos = 0; pos < mLongitud; pos++)
+		if (mInfo[pos] != ' ') break;
+	for (sop = 0; sop < mLongitud; sop++)
+		if (mInfo[mLongitud - 1 - sop] != ' ') break;
+	char* nueva = extraer(pos, mLongitud - pos - sop);
+	poner(nueva);
+	delete nueva;
 }
 
 char* Cadena::extraer(int pos, int tam) {

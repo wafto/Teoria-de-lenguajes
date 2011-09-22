@@ -12,6 +12,7 @@ class Cadena {
 		// Destructor
 		~Cadena();
 		// Metodos
+		void poner(const char* c);
 		void invierte();
 		void imprimir();
 		int longitud();

@@ -13,7 +13,7 @@
 
 int main() {
 	// Creamos una cadena
-	Cadena micadena("Anita lava la Tina");
+	Cadena micadena("   Anita lava la Tina ");
 
 	// Este metodo nos regresa la longitud de la cadena
 	std::cout << micadena.longitud() << std::endl;
@@ -39,6 +39,9 @@ int main() {
 	std::cout << subcadena << std::endl;
 	delete subcadena;
 
+	// Elimina los espacios al inicio y al final de la cadena
+	micadena.recortar();
+	micadena.imprimir();
 	
 	return 0;
 }
