@@ -12,35 +12,41 @@
 #include "library/cadena.h"
 
 int main() {
-	// Creamos una cadena
-	Cadena micadena("   Anita lava la Tina ");
+	std::cout << "-> Creamos una cadena" << std::endl;
+	Cadena micadena("   Anita lava la Tina, pero anita no lo lavo bien, ya que pakita hermana de anita no le presto el trapo. ");
 
-	// Este metodo nos regresa la longitud de la cadena
+	std::cout << std::endl << "-> Este metodo nos regresa la longitud de la cadena" << std::endl;
 	std::cout << micadena.longitud() << std::endl;
 
-	// Metodo para imprimir el contenido de la cadena
+	std::cout << std::endl << "-> Metodo para imprimir el contenido de la cadena" << std::endl;
 	micadena.imprimir();
 
-	// Cambia a Mayusculas toda la cadena y se imprime posteriormente
+	std::cout << std::endl << "-> Elimina los espacios al inicio y al final de la cadena" << std::endl;
+	micadena.recortar();
+	micadena.imprimir();
+
+	std::cout << std::endl << "-> Cambia a Mayusculas toda la cadena y se imprime posteriormente" << std::endl;
 	micadena.mayusculas();
 	micadena.imprimir();
 
-	// Cambia a Minusculas toda la cadena y se imprime posteriormente
+	std::cout << std::endl << "-> Cambia a Minusculas toda la cadena y se imprime posteriormente" << std::endl;
 	micadena.minusculas();
 	micadena.imprimir();
 
-	// Invierte el orden de la cadena
+	std::cout << std::endl << "-> Invierte el orden de la cadena" << std::endl;
 	micadena.invierte();
 	micadena.imprimir();
 	micadena.invierte();
 
-	// Extrae un pedazo de cadena dependiendo de la posicion y longitud
-	char* subcadena = micadena.extraer(6, 4);
+	std::cout << std::endl << "-> Extrae un pedazo de cadena dependiendo de la posicion y longitud (posicion 55, longitud 23)" << std::endl;
+	char* subcadena = micadena.extraer(55, 23);
 	std::cout << subcadena << std::endl;
 	delete subcadena;
 
-	// Elimina los espacios al inicio y al final de la cadena
-	micadena.recortar();
+	std::cout << std::endl << "-> Remplaza el origen por el destino en la cadena (anita -> chachita)" << std::endl;
+	char origen[] = "anita";
+	char destino[] = "chachita";
+	micadena.remplazar(origen, destino);
 	micadena.imprimir();
 	
 	return 0;

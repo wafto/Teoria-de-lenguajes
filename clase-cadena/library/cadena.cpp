@@ -1,5 +1,6 @@
 #include <iostream>
 #include <locale>
+#include <list>
 #include "cadena.h"
 
 // Constructores
@@ -18,10 +19,16 @@ Cadena::~Cadena() {
 }
 
 // Metodos
+int Cadena::tam(const char* c) {
+	int i = 0;
+	for (; c[i] != '\0'; i++);
+	return i;
+}
+
 void Cadena::poner(const char* c) {
 	if (mInfo != NULL)
 		delete mInfo;
-	for (mLongitud = 0; c[mLongitud] != '\0'; mLongitud++);
+	mLongitud = tam(c);
 	mInfo = new char[mLongitud];
 	strcpy(mInfo, c);
 }
@@ -63,6 +70,43 @@ void Cadena::recortar() {
 	delete nueva;
 }
 
+void Cadena::remplazar(char* o, char* r) {
+	int so = tam(o);
+	int sr = tam(r);
+	if (mLongitud < so)
+		return;
+	std::list<char> cbuffer; 
+	int bandera = 0;
+	int limite = mLongitud - so;
+	int i = 0;
+	for (; i < limite; i++) {
+		bandera = 1;
+		for (int j = 0; j < so; j++) {
+			if (mInfo[i + j] != o[j]) {
+				bandera = 0;
+				break;
+			}
+		}
+		if (bandera == 1) {
+			for (int k = 0; k < sr; k++)
+				cbuffer.push_back(r[k]);
+			i += so - 1;
+			continue;
+		}
+		cbuffer.push_back(mInfo[i]);
+	}
+	for (; i < mLongitud; i++)
+		cbuffer.push_back(mInfo[i]);
+	int nTam = cbuffer.size();
+	char* nueva = new char[nTam];
+	for (i = 0; i < nTam; i++) {
+		nueva[i] = cbuffer.front();
+		cbuffer.pop_front();
+	}
+	poner(nueva);
+	delete nueva;
+}
+
 char* Cadena::extraer(int pos, int tam) {
 	char* extraido;
 	if (pos >= 0 && pos < mLongitud - 1 && tam > 0) {
@@ -74,6 +118,4 @@ char* Cadena::extraer(int pos, int tam) {
 	return extraido;
 }
 
-char* Cadena::remplazar(char* v, char* n) {
-	
-}
+

@@ -5,6 +5,8 @@ class Cadena {
 	private:
 		char* mInfo;
 		int mLongitud;
+	protected:
+		int tam(const char* c);
 	public:
 		// Constructoress
 		Cadena();
@@ -19,8 +21,8 @@ class Cadena {
 		void mayusculas();
 		void minusculas();
 		void recortar();
+		void remplazar(char* o, char* r);
 		char* extraer(int pos, int tam);
-		char* remplazar(char* v, char* n);
 };
 
 #endif
