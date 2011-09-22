@@ -12,8 +12,8 @@
 #include "library/cadena.h"
 
 int main() {
-	// Creamos una cadena con el famosisimo "Hola Mundo"
-	Cadena micadena("Hola Mundo");
+	// Creamos una cadena
+	Cadena micadena("Anita lava la Tina");
 
 	// Este metodo nos regresa la longitud de la cadena
 	std::cout << micadena.longitud() << std::endl;
@@ -29,9 +29,16 @@ int main() {
 	micadena.minusculas();
 	micadena.imprimir();
 
-	// Invierte el ordern de la cadena
+	// Invierte el orden de la cadena
 	micadena.invierte();
 	micadena.imprimir();
+	micadena.invierte();
+
+	// Extrae un pedazo de cadena dependiendo de la posicion y longitud
+	char* subcadena = micadena.extraer(6, 4);
+	std::cout << subcadena << std::endl;
+	delete subcadena;
+
 	
 	return 0;
 }

@@ -53,7 +53,10 @@ void Cadena::recortar() {
 char* Cadena::extraer(int pos, int tam) {
 	char* extraido;
 	if (pos >= 0 && pos < mLongitud - 1 && tam > 0) {
-		
+		tam = mLongitud - pos < tam ? mLongitud - pos : tam;
+		extraido = new char[tam];
+		for(int i = 0; i < tam; i++)
+			extraido[i] = mInfo[pos + i];
 	}
 	return extraido;
 }
