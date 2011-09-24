@@ -14,6 +14,7 @@
 int main() {
 	std::cout << "-> Creamos una cadena" << std::endl;
 	Cadena micadena("   Anita lava la Tina, pero anita no lo lavo bien, ya que pakita hermana de anita no le presto el trapo. ");
+	micadena.imprimir();
 
 	std::cout << std::endl << "-> Este metodo nos regresa la longitud de la cadena" << std::endl;
 	std::cout << micadena.longitud() << std::endl;
