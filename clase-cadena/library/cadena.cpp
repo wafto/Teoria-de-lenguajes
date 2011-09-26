@@ -44,7 +44,8 @@ void Cadena::invierte() {
 }
 
 void Cadena::imprimir() {
-	std::cout << mInfo << std::endl; 
+	if (mInfo != NULL)
+		std::cout << mInfo << std::endl; 
 }
 
 int Cadena::longitud() {
