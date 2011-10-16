@@ -16,7 +16,7 @@ class Cadena {
 		// Metodos
 		void poner(const char* c);
 		void invierte();
-		void imprimir();
+		void imprimir(); 
 		int longitud();
 		void mayusculas();
 		void minusculas();
