@@ -1,4 +1,4 @@
-applicaciones: app_instanciacion_1 app_instanciacion_2 app_herencia_1 app_herencia_2 app_polimorfismo_1 app_polimorfismo_2 app_privados_1 app_privados_2 app_protegidos_1 app_protegidos_2
+applicaciones: app_instanciacion_1 app_instanciacion_2 app_herencia_1 app_herencia_2 app_polimorfismo_1 app_polimorfismo_2 app_privados_1 app_privados_2 app_protegidos_1 app_protegidos_2 app_publicos_1 app_publicos_2
 
 # Sources de la biblioteca
 punto.o: biblioteca/punto.cpp biblioteca/punto.h
@@ -68,6 +68,18 @@ protegidos_2.o: protegidos_2.cpp biblioteca/punto.h biblioteca/figura.h
 app_protegidos_2: punto.o figura.o protegidos_2.o
 	g++ -o app_protegidos_2 punto.o figura.o protegidos_2.o
 
+publicos_1.o: publicos_1.cpp biblioteca/punto.h biblioteca/figura.h
+	g++ -c publicos_1.cpp
+
+app_publicos_1: punto.o figura.o publicos_1.o
+	g++ -o app_publicos_1 punto.o figura.o publicos_1.o
+
+publicos_2.o: publicos_2.cpp biblioteca/punto.h biblioteca/figura.h
+	g++ -c publicos_2.cpp
+
+app_publicos_2: punto.o figura.o publicos_2.o
+	g++ -o app_publicos_2 punto.o figura.o publicos_2.o
+
 # Elimina los archivos compilados
 clean:
 	rm punto.o figura.o
@@ -81,4 +93,6 @@ clean:
 	rm privados_2.o app_privados_2
 	rm protegidos_1.o app_protegidos_1
 	rm protegidos_2.o app_protegidos_2
+	rm publicos_1.o app_publicos_1
+	rm publicos_2.o app_publicos_2
 
