@@ -10,6 +10,7 @@ private:
 protected:
 	// Metodos
 	void setPunto(int, Punto*);
+	Punto* getPunto(int);
 public:
 	// Constructor
 	Figura(int);

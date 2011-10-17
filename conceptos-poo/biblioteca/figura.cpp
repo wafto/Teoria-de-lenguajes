@@ -28,3 +28,7 @@ void Figura::setPunto(int posicion, Punto *p) {
 		mPuntos[posicion] = p;
 	}
 }
+
+Punto* Figura::getPunto(int i) {
+	return (i >= 0 && i < getNumPuntos()) ? mPuntos[i] : 0;
+}
