@@ -17,6 +17,15 @@ String::String(const String& c) {
 	for (int i = 0; i < len; i += 1) str[i] = c[i];
 }
 
+String::String(const long l) {
+	stringstream stream;
+	stream << l;
+	const char* cadena = stream.str().c_str();
+	for (len = 0; cadena[len] != '\0'; len += 1);
+	str = new char[len];
+	for (int i = 0 ; i < len; i += 1) str[i] = cadena[i];
+}
+
 String::~String() {
 	if (str != 0) delete [] str;
 }
@@ -31,9 +40,10 @@ void String::operator = (long l) {
 	stringstream stream;
 	stream << l;
 	const char* cadena = stream.str().c_str();
-	cout << cadena << endl;
-	(*this) = cadena;
-	delete cadena;
+	if (str != 0) delete [] str;
+	for (len = 0; cadena[len] != '\0'; len += 1);
+	str = new char[len];
+	for (int i = 0 ; i < len; i += 1) str[i] = cadena[i];
 }
 
 void String::operator = (const char* s) {

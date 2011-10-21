@@ -16,6 +16,8 @@ public:
 	String(const char*);
 	// (1/4 punto) Constructor de copia
 	String(const String&);
+	// Constructor con long
+	String(const long);
 	// (1/4 punto) Destructor
 	~String();
 	// (1/2 punto) Sobrecarga del operador igual

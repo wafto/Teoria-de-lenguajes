@@ -1,12 +1,12 @@
 /**
  * main.cpp
- * Programa que ejemplifica el uso de una cadena con sobrecarga de operadores.
+ * Resolucion del examen de octubre 
  * Elaborado por: Aftab Hussain Miranda
  * Fecha de elaboracion: 20 de Octubre del 2011.
  *
  * Repositorio: https://github.com/wafto
- * Compilacion: g++ classes/string.cpp main_string.cpp -o app_string
- * Ejecucion: ./app_string
+ * Compilacion: g++ classes/string.cpp classes/hashmap.cpp main_string.cpp -o app
+ * Ejecucion: ./app
  */
 #include <iostream>
 #include "classes/string.h"
@@ -26,6 +26,9 @@ int main() {
 	String concat(", Pero no lo lavo bien.");
 	copia = copia + concat;
 	cout << " -> Concatenamos a la copia un nuevo String." << endl << "\t" << copia << endl << endl;
+	
+	String numero = 1234509876;
+	cout << " -> Sobrecarga con un numero a String." << endl << "\t" << numero << endl << endl;
 	
 	String segunda(copia);
 	cout << " -> Comparamos la igualdad entre Strings copia con segunda (copia de copia)." << endl;
