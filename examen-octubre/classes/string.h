@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <iostream>
+using namespace std;
 
 class String {
 private:
@@ -37,8 +38,8 @@ public:
 	long matches(const String&) const;
 	// Para asignar arreglo de caracteres directamente
 	void operator = (const char*);
-	
-	//std::ostream& operator<<(ostream& os, const Date& dt)
+	// Sobrecarga para imprimir directamente con cout
+	friend ostream& operator<<(ostream&, const String&);
 };
 
 #endif

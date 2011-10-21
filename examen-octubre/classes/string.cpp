@@ -28,11 +28,19 @@ void String::operator = (const String& c) {
 }
 
 void String::operator = (long l) {
-	std::stringstream stream;
+	stringstream stream;
 	stream << l;
 	const char* cadena = stream.str().c_str();
+	cout << cadena << endl;
 	(*this) = cadena;
 	delete cadena;
+}
+
+void String::operator = (const char* s) {
+	if (str != 0) delete [] str;
+	for (len = 0; s[len] != '\0'; len += 1);
+	str = new char[len];
+	for (int i = 0 ; i < len; i += 1) str[i] = s[i];
 }
 
 String String::operator + (const String& c) {
@@ -94,10 +102,10 @@ long String::matches(const String& c) const {
 	return matches;
 }
 
-void String::operator = (const char* s) {
-	if (str != 0) delete [] str;
-	for (len = 0; s[len] != '\0'; len += 1);
-	str = new char[len];
-	for (int i = 0 ; i < len; i += 1) str[i] = s[i];
+ostream& operator<<(ostream& out, const String& s) {
+	for (int i = 0; i < s.lenght(); i++)
+		out << s[i];
+	return out;
 }
+
 

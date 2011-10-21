@@ -18,8 +18,6 @@ public:
 	// (1/2 punto) Libera memoria
 	~HashMap();
 	// (4 puntos) Busca la traduccion de la palabra wd
-	String operator [] (const char*) const;
-	// Otro metodo cuando el key es de clase String
 	String operator [] (const String&) const;
 };
 

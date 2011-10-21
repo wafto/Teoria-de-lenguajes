@@ -11,24 +11,53 @@
 #include <iostream>
 #include "classes/string.h"
 #include "classes/hashmap.h"
+using namespace std;
 
-void pstring(const String &str) {
-	for (int i = 0; i < str.lenght(); i++)
-		std::cout << str[i];
-	std::cout << std::endl;
-}
 
 int main() {
 	
-	HashMap hash;
+	cout << endl;
+	String original = "Anita lava la tina";
+	cout << " -> Creamos una instancia String." << endl << "\t" << original << endl << endl;
 	
-	String yo = "aftab"; 
+	String copia(original);
+	cout << " -> Hacemos una copia del original." << endl << "\t" << copia << endl << endl;
 	
-	pstring(hash["house"]);
-	pstring(hash["computer"]);
-	pstring(hash["apple"]);
-	pstring(hash["school"]);
-	pstring(hash[yo]);
+	String concat(", Pero no lo lavo bien.");
+	copia = copia + concat;
+	cout << " -> Concatenamos a la copia un nuevo String." << endl << "\t" << copia << endl << endl;
+	
+	String segunda(copia);
+	cout << " -> Comparamos la igualdad entre Strings copia con segunda (copia de copia)." << endl;
+	cout << "\t" << (copia == segunda ? "Son iguales." : "Son diferentes.") << endl << endl;
+	
+	String tigres = "Tres tristes tigres, tragaban trigo en un trigal, trababan en un trigal tres tristes tigres.";
+	String coincidencias = "tri";
+	cout << " -> Encontramos las coincidencias en la cadena de trigres." << endl;
+	cout << "\tTigres: " << tigres << endl;
+	cout << "\tCoincidencia: " << coincidencias << endl;
+	cout << "\tNumero de coincidencias: " << tigres.matches(coincidencias) << endl;
+	cout << "\tPosiciones de las coincidencias: ";
+	int c = tigres.matches(coincidencias);
+	long* pos = tigres.search(coincidencias);
+	for (int i = 0; i < c; i++)
+		cout << pos[i] << (c != i + 1 ? ", " : "") ;
+	cout << endl << endl;
+	delete [] pos;
+	
+	HashMap diccionario;
+	String school   = "school";
+	String house    = "house";
+	String notebook = "notebook";
+	String aftab    = "aftab";
+	cout << " -> Creamos una instancia HashMap (diccionario) y la utilizamos." << endl;
+	cout << "\t" << "diccionario[" << school   << "]\t: " << diccionario[school]   << endl;
+	cout << "\t" << "diccionario[" << house    << "]\t: " << diccionario[house]    << endl;
+	cout << "\t" << "diccionario[" << "apple"  << "]\t: " << diccionario["apple"]  << endl; 
+	cout << "\t" << "diccionario[" << notebook << "]\t: " << diccionario[notebook] << endl; 
+	cout << "\t" << "diccionario[" << "bed"    << "]\t: " << diccionario["bed"]    << endl; 
+	cout << "\t" << "diccionario[" << aftab    << "]\t: " << diccionario[aftab]    << endl;  
+	cout << endl;
 	
 	return 0;
 }

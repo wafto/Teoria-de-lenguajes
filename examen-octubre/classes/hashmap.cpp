@@ -19,15 +19,9 @@ HashMap::~HashMap() {
 	delete [] wds;
 }
 
-String HashMap::operator [] (const char* s) const {
-	String aux(s);
-	return (*this)[aux];
-}
-
 String HashMap::operator [] (const String& s) const {
-	String aux(s);
 	for (int i = 0; i < maxw; i++)
-		if (wds[i].english == aux) return wds[i].spanish;
-	return aux;
+		if (wds[i].english == s) return wds[i].spanish;
+	return s;
 }
 
