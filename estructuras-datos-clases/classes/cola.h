@@ -63,7 +63,7 @@ template <class T>
 T Cola<T>::verFinal() {
 	T dato;
 	if (!estaVacia())
-		dato = inicio->dato;
+		dato = final->dato;
 	return dato;
 }
 
