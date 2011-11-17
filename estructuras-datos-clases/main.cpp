@@ -5,7 +5,7 @@
  * Fecha de elaboracion: 16 de Noviembre del 2011.
  *
  * Repositorio: https://github.com/wafto
- * Compilacion: g++ -o app classes/pila.h main.cpp
+ * Compilacion: g++ -o app main.cpp
  * Ejecucion: ./app
  */
 #include <iostream>
