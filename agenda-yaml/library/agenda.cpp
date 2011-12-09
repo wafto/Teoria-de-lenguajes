@@ -209,15 +209,12 @@ void Agenda::elimina(const unsigned long indice) {
 			for (unsigned long i = 0; i < indice; i++)
 				aux = aux->siguiente;
 			if (aux == inicio) {
-			cout << " 1 "<< endl;
 			inicio = aux->siguiente;
 			inicio->anterior = 0;
 			} else if (aux == final) {
-				cout << " 2 "<< endl;
 				final = aux->anterior;
 				final->siguiente = 0;
 			} else {
-				cout << " 3 "<< endl;
 				aux->siguiente->anterior = aux->anterior;
 				aux->anterior->siguiente = aux->siguiente;
 			}

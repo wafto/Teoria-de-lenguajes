@@ -26,7 +26,7 @@ public:
 	// Baja
 	void baja();
 	// Cambio
-	//void cambio();
+	void cambio();
 	// Consulta
 	void consulta();
 	// Vacia
@@ -40,6 +40,10 @@ protected:
 	void limpiar();
 	// Limpia el buffer
 	void buffoff();
+	// pregunta debe ser afirmativa
+	bool pregunta(const string&);
+	// obten id de una cadena
+	unsigned long obtenid(const string&);
 };
 
 #endif

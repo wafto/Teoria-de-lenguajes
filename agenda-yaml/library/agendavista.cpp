@@ -43,7 +43,7 @@ void AgendaVista::inicia() {
 			case 'e': case 'E':
 				limpiar();
 				separador();
-				//cambio();
+				cambio();
 				separador();
 				pausar();
 				break;
@@ -138,14 +138,12 @@ void AgendaVista::alta() {
 	Contacto *contacto = new Contacto;
 	if (contacto) {
 		buffoff();
-		string opcion;
 		cout << "-> Datos de alta de nuevo contacto." << endl;
 		cout << "   - Nombre: ";    getline(cin, contacto->nombre);
 		cout << "   - Apellidos: "; getline(cin, contacto->apellidos);
 		cout << "   - R.F.C.: ";    getline(cin, contacto->rfc);
-		do {
-			cout << "   - Desea agregar telefono? [S] para si, cualquier letra para no: "; cin >> opcion;
-			if (opcion[0] == 'S' || opcion[0] == 's') {
+		do { 
+			if (pregunta("   - Desea agregar telefono?")) {
 				buffoff();
 				Telefono telefono;
 				cout << "     + Telefono: " << endl;
@@ -157,8 +155,7 @@ void AgendaVista::alta() {
 			}
 		} while (true);
 		do {
-			cout << "   - Desea agregar correo? [S] para si, cualquier letra para no: "; cin >> opcion;
-			if (opcion[0] == 'S' || opcion[0] == 's') {
+			if (pregunta("   - Desea agregar correo?")) {
 				buffoff();
 				Correo correo;
 				cout << "     + Correo: " << endl;
@@ -170,8 +167,7 @@ void AgendaVista::alta() {
 			}
 		} while (true);
 		do {
-			cout << "   - Desea agregar domicilio? [S] para si, cualquier letra para no: "; cin >> opcion;
-			if (opcion[0] == 'S' || opcion[0] == 's') {
+			if (pregunta("   - Desea agregar domicilio?")) {
 				buffoff();
 				Domicilio domicilio;
 				cout << "     + Domicilio: " << endl;
@@ -182,8 +178,7 @@ void AgendaVista::alta() {
 				break;
 			}
 		} while (true);
-		cout << "-> Dar de alta el contacto especificado? [S] para si, cualquier letra para no: "; cin >> opcion;
-		if (opcion[0] == 'S' || opcion[0] == 's') {
+		if (pregunta("-> Dar de alta el contacto especificado?")) {
 			bool bandera;
 			cout << "   Se procede a guardar el nuevo contacto..." << endl;
 			agenda->agregar(contacto, &bandera);
@@ -193,6 +188,8 @@ void AgendaVista::alta() {
 				cout << "   Hubo un error al intentar guardar el contacto (Falta de memoria)." << endl;
 				delete contacto;
 			}
+		} else {
+			delete contacto;
 		}
 	} else {
 		cout << "-> Hubo un error al intentar crear el nuevo contacto (Falta de memoria)." << endl;
@@ -200,19 +197,11 @@ void AgendaVista::alta() {
 }
 
 void AgendaVista::baja() {
-	string indice;
-	cout << "-> Escriba el id del contacto que quiere eliminar: ";
-	cin >> indice;
-	istringstream stream(indice);
-	int k, i = 0;
-	stream >> i;
+	unsigned long i = obtenid("->Escriba el id del contacto que quiere eliminar: ");
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
-		buffoff();
-		string opcion;
-		cout << "-> Dar de baja el contacto " <<  nombre << "? [S] para si, cualquier letra para no: "; cin >> opcion;
-		if (opcion[0] == 'S' || opcion[0] == 's') {
+		if (pregunta("-> Dar de baja el contacto " + nombre + "?")) {
 			cout << "-> Se procede a eliminar el contacto " << nombre << "." << endl;
 			agenda->elimina(i);
 			cout << "-> Se elimino de la agenda el contacto." << endl;
@@ -222,13 +211,23 @@ void AgendaVista::baja() {
 	}
 }
 
+void AgendaVista::cambio() {
+	unsigned long i = obtenid("-> Escriba el id del contacto que quiere editar: ");
+	if (i >= 0 && i < agenda->longitud()) {
+		Contacto* contacto = (*agenda)[i];
+		string nombre = contacto->nombre + " " + contacto->apellidos;
+		if (pregunta("->Editar el contacto " + nombre + "?")) {
+			cout << "-> Se procede a editar el contacto " << nombre << "." << endl;
+			//cout << " - Desea editar nombre? " << contacto->nombre << endl;
+			//cout << "   - Nombre: ";    getline(cin, contacto->nombre);
+		}
+	} else {
+		cout << "-> No existe tal registro de contacto dentro de la agenda." << endl;
+	}
+}
+
 void AgendaVista::consulta() {
-	string indice;
-	cout << "-> Escriba el id del contacto que quiere consultar: ";
-	cin >> indice;
-	istringstream stream(indice);
-	int k, i = 0;
-	stream >> i;
+	unsigned long k, i = obtenid("-> Esciba el id del contacto que quiere consultar: ");
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		cout << "-> Consulta de contacto" << endl;
@@ -262,11 +261,7 @@ void AgendaVista::consulta() {
 }
 
 void AgendaVista::vaciar() {
-	string opcion;
-	cout << "-> Desea vaciar por completo la agenda de contactos?" << endl;
-	cout << "   [S] para si, cualquier otra cosa para no: ";
-	cin >> opcion;
-	if (opcion[0] == 'S' || opcion[0] == 's') {
+	if (pregunta("->Desea vaciar por completo la agenda de contactos?")) {
 		if (agenda->estaVacia()) {
 			cout << "-> La agenda se encuentra actualmente vacia." << endl;
 		} else {
@@ -305,6 +300,21 @@ void AgendaVista::buffoff() {
 	cin.ignore(1024, '\n');
 }
 
+bool AgendaVista::pregunta(const string& pregunta) {
+	string respuesta;
+	cout << pregunta << " [S] para si, cualquier otra letra para no: ";
+	cin >> respuesta;
+	return respuesta == "s" || respuesta == "S";
+}
 
+unsigned long AgendaVista::obtenid(const string& oracion) {
+	string indice;
+	unsigned long i;
+	cout << oracion;
+	cin >> indice;
+	istringstream stream(indice);
+	stream >> i;
+	return i;
+}
 
 
