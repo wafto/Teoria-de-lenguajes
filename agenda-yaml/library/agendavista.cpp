@@ -209,9 +209,14 @@ void AgendaVista::baja() {
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
-		cout << "-> Se procede a eliminar el contacto " << nombre << "." << endl;
-		agenda->elimina(i);
-		cout << "-> Se elimino de la agenda el contacto." << endl;
+		buffoff();
+		string opcion;
+		cout << "-> Dar de baja el contacto " <<  nombre << "? [S] para si, cualquier letra para no: "; cin >> opcion;
+		if (opcion[0] == 'S' || opcion[0] == 's') {
+			cout << "-> Se procede a eliminar el contacto " << nombre << "." << endl;
+			agenda->elimina(i);
+			cout << "-> Se elimino de la agenda el contacto." << endl;
+		}
 	} else {
 		cout << "-> No existe tal registro de contacto dentro de la agenda." << endl;
 	}
