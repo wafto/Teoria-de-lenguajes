@@ -203,17 +203,24 @@ Contacto* Agenda::operator [] (const unsigned long indice) {
 void Agenda::elimina(const unsigned long indice) {
 	if (!estaVacia() && indice < longitud()) {
 		nodo* aux = inicio;
-		for (unsigned long i = 0; i < indice; i++)
-			aux = aux->siguiente;
-		if (aux == inicio) {
+		if (longitud() == 1) {
+			inicio = final = 0;
+		} else {
+			for (unsigned long i = 0; i < indice; i++)
+				aux = aux->siguiente;
+			if (aux == inicio) {
+			cout << " 1 "<< endl;
 			inicio = aux->siguiente;
 			inicio->anterior = 0;
-		} else if (aux == final) {
-			final = aux->anterior;
-			final->siguiente = 0;
-		} else {
-			aux->siguiente->anterior = aux->anterior;
-			aux->anterior->siguiente = aux->siguiente;
+			} else if (aux == final) {
+				cout << " 2 "<< endl;
+				final = aux->anterior;
+				final->siguiente = 0;
+			} else {
+				cout << " 3 "<< endl;
+				aux->siguiente->anterior = aux->anterior;
+				aux->anterior->siguiente = aux->siguiente;
+			}
 		}
 		tam -= 1;
 		delete aux->contacto;
