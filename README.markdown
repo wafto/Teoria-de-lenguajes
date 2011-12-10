@@ -3,6 +3,7 @@
 Diversos snippets programados principalmente en c y c++, visitá mi perfil de [facebook](http://www.facebook.com/wafto) 
 o de [google+](https://plus.google.com/105992688186668382970/posts).
 
++ **agenda-yaml** - Programa que simula una agenda utilizando como base de datos un archivo yaml, tiene altas, bajas, cambios y consultas.
 + **clase-cadena** - Programa que ejemplifica el uso de una clase cadena.
 + **conceptos-poo** - Programa que ejemplifica el uso de instanciación, herencia, polimorfísmo, acceso public, protected y private.
 + **estructuras-datos-clases** - Programa que hace uso de una clase pila y clase cola utilizando templates. 
