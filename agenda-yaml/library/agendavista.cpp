@@ -197,12 +197,12 @@ void AgendaVista::alta() {
 }
 
 void AgendaVista::baja() {
-	unsigned long i = obtenid("->Escriba el id del contacto que quiere eliminar: ");
+	unsigned long i = obtenid("->Escriba el id del contacto que quiere dar de baja: ");
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
 		if (pregunta("-> Dar de baja el contacto " + nombre + "?")) {
-			cout << "-> Se procede a eliminar el contacto " << nombre << "." << endl;
+			cout << "-> Se procede a dar de baja el contacto " << nombre << "." << endl;
 			agenda->elimina(i);
 			cout << "-> Se elimino de la agenda el contacto." << endl;
 		}
@@ -216,10 +216,33 @@ void AgendaVista::cambio() {
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
-		if (pregunta("->Editar el contacto " + nombre + "?")) {
-			cout << "-> Se procede a editar el contacto " << nombre << "." << endl;
-			//cout << " - Desea editar nombre? " << contacto->nombre << endl;
-			//cout << "   - Nombre: ";    getline(cin, contacto->nombre);
+		if (pregunta("-> Editar el contacto " + nombre + "?")) {
+			buffoff();
+			if (pregunta(" - Desea editar el nombre (" + contacto->nombre + ")?")) {
+				cout << "   - Nombre: "; getline(cin, contacto->nombre);
+			}
+			if (pregunta(" - Desea editar el apellido(s) (" + contacto->apellidos + ")?")) {
+				cout << "   - Apellido(s): "; getline(cin, contacto->apellidos);
+			}
+			if (pregunta(" - Desea editar el R.F.C. (" + contacto->rfc + ")?")) {
+				cout << "   - R.F.C.: "; getline(cin, contacto->rfc);
+			}
+			if (contacto->telefonos.size() > 0) {
+				cout << " - Edicion de Telefono(s):" << endl;
+				list<Telefono>::iterator t;
+				for (t = contacto->telefonos.begin(); t != contacto->telefonos.end(); ++t) {
+					if (pregunta("   - Desea editar (" + t->tipo + ": " + t->numero + ")?")) {
+						if (pregunta("   - Desea eliminarlo?")) {
+							contacto->telefonos.erase(t);
+						} else {
+							buffoff();
+							cout << "     + Telefono: (" << t->tipo << ": "<< t->numero << ")" << endl;
+							cout << "       - tipo: ";   getline(cin, t->tipo);
+							cout << "       - numero: "; getline(cin, t->numero);	
+						}
+					}	
+				}
+			}
 		}
 	} else {
 		cout << "-> No existe tal registro de contacto dentro de la agenda." << endl;
