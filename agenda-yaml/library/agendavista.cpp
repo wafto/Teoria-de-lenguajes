@@ -16,9 +16,13 @@ void AgendaVista::inicia() {
 			case 'x': case 'X':
 				limpiar();
 				separador();
-				cout << "-> Adios." << endl;
-				separador();
-				return;
+				if (pregunta("-> Desea salir del programa?")) {
+					cout << "-> Adios." << endl;
+					separador();
+					return;
+				} else {
+					continue;
+				}
 			case 'v': case 'V':
 				limpiar();
 				separador();
@@ -197,7 +201,7 @@ void AgendaVista::alta() {
 }
 
 void AgendaVista::baja() {
-	unsigned long i = obtenid("->Escriba el id del contacto que quiere dar de baja: ");
+	unsigned long i = obtenid("-> Escriba el id del contacto que quiere dar de baja: ");
 	if (i >= 0 && i < agenda->longitud()) {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
@@ -217,14 +221,16 @@ void AgendaVista::cambio() {
 		Contacto* contacto = (*agenda)[i];
 		string nombre = contacto->nombre + " " + contacto->apellidos;
 		if (pregunta("-> Editar el contacto " + nombre + "?")) {
-			buffoff();
 			if (pregunta(" - Desea editar el nombre (" + contacto->nombre + ")?")) {
+				buffoff();
 				cout << "   - Nombre: "; getline(cin, contacto->nombre);
 			}
 			if (pregunta(" - Desea editar el apellido(s) (" + contacto->apellidos + ")?")) {
+				buffoff();
 				cout << "   - Apellido(s): "; getline(cin, contacto->apellidos);
 			}
 			if (pregunta(" - Desea editar el R.F.C. (" + contacto->rfc + ")?")) {
+				buffoff();
 				cout << "   - R.F.C.: "; getline(cin, contacto->rfc);
 			}
 			if (contacto->telefonos.size() > 0) {
@@ -237,12 +243,80 @@ void AgendaVista::cambio() {
 						} else {
 							buffoff();
 							cout << "     + Telefono: (" << t->tipo << ": "<< t->numero << ")" << endl;
-							cout << "       - tipo: ";   getline(cin, t->tipo);
+							cout << "       - tipo: "; getline(cin, t->tipo);
 							cout << "       - numero: "; getline(cin, t->numero);	
 						}
 					}	
 				}
 			}
+			do { 
+				if (pregunta(" - Desea agregar Telefono?")) {
+					buffoff();
+					Telefono telefono;
+					cout << "     + Telefono: " << endl;
+					cout << "       - tipo: "; getline(cin, telefono.tipo);
+					cout << "       - numero: "; getline(cin, telefono.numero);
+					contacto->telefonos.push_back(telefono);
+				} else {
+					break;
+				}
+			} while (true);
+			if (contacto->correos.size() > 0) {
+				cout << " - Edicion de Correo(s):" << endl;
+				list<Correo>::iterator c;
+				for (c = contacto->correos.begin(); c != contacto->correos.end(); ++c) {
+					if (pregunta("   - Desea editar (" + c->tipo + ": " + c->email + ")?")) {
+						if (pregunta("   - Desea eliminarlo?")) {
+							contacto->correos.erase(c);
+						} else {
+							buffoff();
+							cout << "     + Correo: (" << c->tipo << ": "<< c->email << ")" << endl;
+							cout << "       - tipo: "; getline(cin, c->tipo);
+							cout << "       - email: "; getline(cin, c->email);	
+						}
+					}	
+				}
+			}
+			do { 
+				if (pregunta(" - Desea agregar Correo?")) {
+					buffoff();
+					Correo correo;
+					cout << "     + Correo: " << endl;
+					cout << "       - tipo: "; getline(cin, correo.tipo);
+					cout << "       - email: "; getline(cin, correo.email);
+					contacto->correos.push_back(correo);
+				} else {
+					break;
+				}
+			} while (true);
+			if (contacto->domicilios.size() > 0) {
+				cout << " - Edicion de Domicilio(s):" << endl;
+				list<Domicilio>::iterator d;
+				for (d = contacto->domicilios.begin(); d != contacto->domicilios.end(); ++d) {
+					if (pregunta("   - Desea editar (" + d->tipo + ": " + d->direccion + ")?")) {
+						if (pregunta("   - Desea eliminarlo?")) {
+							contacto->domicilios.erase(d);
+						} else {
+							buffoff();
+							cout << "     + Domicilio: (" << d->tipo << ": "<< d->direccion << ")" << endl;
+							cout << "       - tipo: "; getline(cin, d->tipo);
+							cout << "       - direccion: "; getline(cin, d->direccion);	
+						}
+					}	
+				}
+			}
+			do { 
+				if (pregunta(" - Desea agregar Domicilio?")) {
+					buffoff();
+					Domicilio domicilio;
+					cout << "     + Domicilio: " << endl;
+					cout << "       - tipo: "; getline(cin, domicilio.tipo);
+					cout << "       - direccion: "; getline(cin, domicilio.direccion);
+					contacto->domicilios.push_back(domicilio);
+				} else {
+					break;
+				}
+			} while (true);
 		}
 	} else {
 		cout << "-> No existe tal registro de contacto dentro de la agenda." << endl;
@@ -284,7 +358,7 @@ void AgendaVista::consulta() {
 }
 
 void AgendaVista::vaciar() {
-	if (pregunta("->Desea vaciar por completo la agenda de contactos?")) {
+	if (pregunta("-> Desea vaciar por completo la agenda de contactos?")) {
 		if (agenda->estaVacia()) {
 			cout << "-> La agenda se encuentra actualmente vacia." << endl;
 		} else {
