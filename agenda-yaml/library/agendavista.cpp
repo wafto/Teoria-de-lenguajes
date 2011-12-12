@@ -131,7 +131,10 @@ void AgendaVista::indice() {
 	if (tam > 0) {
 		for (unsigned long i = 0; i < tam; i++) {
 			contacto = (*agenda)[i];
-			cout << "   [" << i << "] - " << contacto->nombre << " " << contacto->apellidos << endl;
+			cout << "   [" << i << "] - " << contacto->nombre << " " << contacto->apellidos << "\t - ";
+			cout << contacto->telefonos.size() << " telefono(s), ";
+			cout << contacto->correos.size() << " correo(s), ";
+			cout << contacto->domicilios.size() << " domicilio(s)." << endl;
 		}
 	} else {
 		cout << "-> La agenda se encuentra vacia. agregue contactos o cargue un archivo." << endl;
